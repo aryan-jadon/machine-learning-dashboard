@@ -13,14 +13,9 @@ process_function = st.selectbox('Choose an Action', ['None', 'Process New News']
 
 if process_function == 'Process New News':
     st.header('Collecting News from Sources')
-    st.write('Loading Model Weights')
-    with open(cdn_json, 'r') as f:
-        news_sources = json.load(f)
+    news_data = extract_rss_feeds("https://rss.nytimes.com/services/xml/rss/nyt/US.xml")
+    st.dataframe(news_data)
 
-    st.write(news_sources)
-    # st.dataframe(df)
-
-    st.subheader('Description')
     st.write('Loading Model Weights')
     naive_bayes_weights = cdn_repo.format(file_name="NaiveBayes")
     st.write('Loading Naive Bayes Weights')
