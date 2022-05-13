@@ -12,3 +12,4 @@ if process_function == 'Process New News':
     st.write('Test Write')
     st.markdown(r'Test Write')
     st.write('Test Write')
+
