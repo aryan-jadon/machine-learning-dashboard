@@ -1,5 +1,5 @@
+import pandas as pd
 import streamlit as st
-from news_articles import extract_rss_feeds
 import numpy as np
 import json
 
@@ -9,16 +9,16 @@ cdn_repo = "https://raw.githubusercontent.com/aryan-jadon/machine-learning-dashb
            "file_name}.pkl "
 cdn_json = "https://raw.githubusercontent.com/aryan-jadon/machine-learning-dashboard/master/rss/news_sources.json"
 
-process_function = st.selectbox('Choose an Action', ['None', 'Process New News'])
+process_function = st.selectbox('Choose an Action', ['None',
+                                                     'Gather News from RSS Feed',
+                                                     'Classify News'])
 
-if process_function == 'Process New News':
+if process_function == 'Gather News from RSS Feed':
     st.header('Collecting News from Sources')
-    news_data = extract_rss_feeds("https://rss.nytimes.com/services/xml/rss/nyt/US.xml")
-    print(news_data)
-    st.write(news_data)
-    st.dataframe(news_data)
-    st.write('Loading Model Weights')
-    naive_bayes_weights = cdn_repo.format(file_name="NaiveBayes")
-    st.write('Loading Naive Bayes Weights')
-    SVM_weights = cdn_repo.format(file_name="SVM")
-    st.write('Loading SVM Weights')
+
+    news_file = pd.read_excel("https://machine-learning-articles.s3.us-west-2.amazonaws.com/05-16-2022.xlsx")
+    st.table(news_file)
+
+
+if process_function == 'Classify News':
+    st.header('Processing Dataframe')
